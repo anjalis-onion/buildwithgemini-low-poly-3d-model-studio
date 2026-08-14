@@ -34,9 +34,16 @@
   header {
     background: var(--accent-gradient);
     color: #fff;
-    padding: 1.2rem 1.5rem;
-    text-align: center;
+    padding: 1rem 1.5rem;
     box-shadow: 0 4px 15px rgba(255, 101, 132, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-brand {
+    display: flex;
+    flex-direction: column;
   }
 
   .header-title {
@@ -47,15 +54,38 @@
     margin: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 0.5rem;
   }
 
   .header-subtitle {
-    font-size: 0.95rem;
-    opacity: 0.92;
-    margin-top: 0.2rem;
+    font-size: 0.9rem;
+    opacity: 0.95;
+    margin-top: 0.1rem;
     font-weight: 600;
+  }
+
+  .dialogue-trigger-btn {
+    background: #ffffff;
+    color: var(--accent);
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    padding: 0.5rem 1.1rem;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .dialogue-trigger-btn:hover {
+    background: #ffe3e9;
+    color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
   }
 
   .quick-prompts {
@@ -212,6 +242,174 @@
     box-shadow: 0 6px 16px rgba(255, 101, 132, 0.45);
   }
 
+  /* --- Cute Dialogue Modal Layout --- */
+  .dialogue-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(74, 43, 51, 0.45);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .dialogue-overlay.active {
+    display: flex;
+  }
+
+  .dialogue-card {
+    background: #ffffff;
+    border: 3px solid var(--border);
+    border-radius: 28px;
+    width: 90%;
+    max-width: 520px;
+    padding: 1.8rem;
+    box-shadow: 0 20px 50px rgba(255, 101, 132, 0.3);
+    position: relative;
+    animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .dialogue-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px dashed var(--border);
+    padding-bottom: 0.9rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .dialogue-title {
+    font-family: 'Fredoka', cursive, sans-serif;
+    font-size: 1.4rem;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dialogue-close {
+    background: #ffedf2;
+    color: var(--accent);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .dialogue-close:hover {
+    background: var(--accent);
+    color: #ffffff;
+    transform: rotate(90deg);
+  }
+
+  .dialogue-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .dialogue-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .dialogue-label {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .dialogue-select, .dialogue-input {
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .color-picker-row {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .color-picker-group {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #fff5f8;
+    padding: 0.5rem 0.8rem;
+    border-radius: 14px;
+    border: 2px solid var(--border);
+  }
+
+  .color-picker-group input[type="color"] {
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: transparent;
+    padding: 0;
+  }
+
+  .dialogue-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+  }
+
+  .btn-cancel {
+    background: #ffedf2;
+    color: #d84364;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 0.7rem 1.2rem;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-cancel:hover {
+    background: #ffd6e0;
+  }
+
+  .btn-submit {
+    background: var(--accent-gradient);
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    padding: 0.7rem 1.4rem;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 101, 132, 0.3);
+    transition: all 0.2s ease;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 101, 132, 0.45);
+  }
+
   /* --- A2UI component styles --- */
   .a2card {
     border: 2px solid var(--border);
@@ -239,8 +437,13 @@
 <body>
 
 <header>
-  <div class="header-title">Low-Poly 3D Studio 🎨✨</div>
-  <div class="header-subtitle">Procedural 3D Model & Asset Generator</div>
+  <div class="header-brand">
+    <div class="header-title">Low-Poly 3D Studio 🎨✨</div>
+    <div class="header-subtitle">Procedural 3D Model & Asset Generator</div>
+  </div>
+  <button class="dialogue-trigger-btn" onclick="openDialogue()">
+    ⚙️ Studio Dialogue
+  </button>
 </header>
 
 <div class="quick-prompts">
@@ -257,10 +460,53 @@
   <button class="send-btn">Generate ✨</button>
 </form>
 
+<!-- Custom Cute Studio Dialogue Modal -->
+<div id="dialogueModal" class="dialogue-overlay" onclick="closeDialogueOnBackdrop(event)">
+  <div class="dialogue-card">
+    <div class="dialogue-header">
+      <div class="dialogue-title">🎨 Custom 3D Model Settings</div>
+      <button class="dialogue-close" onclick="closeDialogue()">✕</button>
+    </div>
+    <div class="dialogue-body">
+      <div class="dialogue-field">
+        <label class="dialogue-label">Model Type</label>
+        <select id="diagType" class="dialogue-select">
+          <option value="tree">🌲 Low-Poly Tree</option>
+          <option value="crystal">💎 Crystal Cluster</option>
+          <option value="house">🏠 Cozy House / Cabin</option>
+          <option value="rock">🪨 Granite Rock / Boulder</option>
+        </select>
+      </div>
+      <div class="dialogue-field">
+        <label class="dialogue-label">Output Model Name</label>
+        <input id="diagName" class="dialogue-input" placeholder="e.g. emerald_crystal" value="custom_3d_asset">
+      </div>
+      <div class="dialogue-field">
+        <label class="dialogue-label">Colors</label>
+        <div class="color-picker-row">
+          <div class="color-picker-group">
+            <input type="color" id="diagColorPrimary" value="#2e8b57">
+            <span class="dialogue-label">Primary</span>
+          </div>
+          <div class="color-picker-group">
+            <input type="color" id="diagColorSecondary" value="#8b4513">
+            <span class="dialogue-label">Secondary</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dialogue-footer">
+      <button class="btn-cancel" onclick="closeDialogue()">Cancel</button>
+      <button class="btn-submit" onclick="submitDialogue()">✨ Generate Model</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const log = document.getElementById("log");
 const form = document.getElementById("form");
 const input = document.getElementById("input");
+const dialogueModal = document.getElementById("dialogueModal");
 
 function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 
@@ -274,6 +520,30 @@ function bubble(who) {
 function sendQuick(promptText) {
   input.value = promptText;
   form.dispatchEvent(new Event("submit"));
+}
+
+/* --- Dialogue Modal Functions --- */
+function openDialogue() {
+  dialogueModal.classList.add("active");
+}
+
+function closeDialogue() {
+  dialogueModal.classList.remove("active");
+}
+
+function closeDialogueOnBackdrop(event) {
+  if (event.target === dialogueModal) closeDialogue();
+}
+
+function submitDialogue() {
+  const type = document.getElementById("diagType").value;
+  const name = document.getElementById("diagName").value.trim() || "custom_asset";
+  const primary = document.getElementById("diagColorPrimary").value;
+  const secondary = document.getElementById("diagColorSecondary").value;
+
+  const promptText = `Generate a ${type} model named "${name}" with primary color ${primary} and secondary color ${secondary}.`;
+  closeDialogue();
+  sendQuick(promptText);
 }
 
 /* ----------------------------------------------------------------------------
