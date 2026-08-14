@@ -96,18 +96,20 @@
   .quick-prompts {
     display: flex;
     justify-content: center;
-    gap: 0.6rem;
+    gap: 0.5rem;
     padding: 0.8rem 1rem;
     background: #ffedf2;
     border-bottom: 2px dashed var(--border);
     flex-wrap: wrap;
+    max-height: 120px;
+    overflow-y: auto;
   }
 
   .pill {
     background: #fff;
     border: 2px solid var(--border);
     border-radius: 20px;
-    padding: 0.4rem 0.9rem;
+    padding: 0.35rem 0.85rem;
     font-family: 'Fredoka', sans-serif;
     font-size: 0.85rem;
     color: #d84364;
@@ -325,7 +327,7 @@
     border: 3px solid var(--border);
     border-radius: 28px;
     width: 90%;
-    max-width: 540px;
+    max-width: 560px;
     padding: 1.8rem;
     box-shadow: 0 20px 50px rgba(255, 101, 132, 0.3);
     position: relative;
@@ -525,7 +527,7 @@
 <header>
   <div class="header-brand">
     <div class="header-title">Low-Poly 3D Studio 🎨✨</div>
-    <div class="header-subtitle">Procedural 3D Model & Asset Generator</div>
+    <div class="header-subtitle">14 Procedural 3D Model Generators for Blender</div>
   </div>
   <div class="header-actions">
     <button class="action-btn" onclick="openGuideModal()">
@@ -538,16 +540,26 @@
 </header>
 
 <div class="quick-prompts">
-  <button class="pill" onclick="sendQuick('Generate a low poly pine tree')">🌲 Low-Poly Tree</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly pine tree')">🌲 Tree</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly glow mushroom')">🍄 Glow Shroom</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly magic potion')">🧪 Magic Potion</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly treasure chest')">🏴‍☠️ Treasure Chest</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly sword in stone')">🗡️ Sword in Stone</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly runestone obelisk')">📜 Runestone</button>
   <button class="pill" onclick="sendQuick('Generate a low poly crystal cluster')">💎 Crystal Gem</button>
   <button class="pill" onclick="sendQuick('Generate a low poly cozy house')">🏠 Cozy House</button>
   <button class="pill" onclick="sendQuick('Generate a low poly granite rock')">🪨 Granite Rock</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly windmill')">🌬️ Windmill</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly campfire with pot')">🪵 Campfire & Pot</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly iceberg glacier')">🧊 Iceberg</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly sci-fi hover pod')">🛸 Hover Pod</button>
+  <button class="pill" onclick="sendQuick('Generate a low poly hot air balloon')">🎈 Hot Air Balloon</button>
 </div>
 
 <div id="log"></div>
 
 <form id="form">
-  <input id="input" placeholder="Describe a 3D model to generate (e.g. crystal, tree, house, rock)…" autocomplete="off" autofocus>
+  <input id="input" placeholder="Describe a 3D asset (e.g. potion, chest, sword in stone, windmill, hover pod)…" autocomplete="off" autofocus>
   <button class="send-btn">Generate ✨</button>
 </form>
 
@@ -560,36 +572,47 @@
     </div>
     <div class="dialogue-body">
       <div class="dialogue-field">
-        <label class="dialogue-label">Model Type</label>
+        <label class="dialogue-label">Model Category & Type (14 Assets Available)</label>
         <select id="diagType" class="dialogue-select">
           <option value="tree">🌲 Low-Poly Tree</option>
-          <option value="crystal">💎 Crystal Cluster</option>
+          <option value="mushroom">🍄 Glow Mushroom</option>
+          <option value="potion">🧪 Magic Potion Flask</option>
+          <option value="chest">🏴‍☠️ Treasure Chest</option>
+          <option value="sword">🗡️ Sword in Stone</option>
+          <option value="obelisk">📜 Ancient Runestone Obelisk</option>
+          <option value="crystal">💎 Crystal Gem Cluster</option>
           <option value="house">🏠 Cozy House / Cabin</option>
           <option value="rock">🪨 Granite Rock / Boulder</option>
+          <option value="windmill">🌬️ Dutch Windmill</option>
+          <option value="campfire">🪵 Campfire & Cooking Pot</option>
+          <option value="iceberg">🧊 Iceberg Glacier</option>
+          <option value="hover_pod">🛸 Sci-Fi Hover Pod</option>
+          <option value="balloon">🎈 Hot Air Balloon</option>
         </select>
       </div>
       <div class="dialogue-field">
         <label class="dialogue-label">Output Model Name</label>
-        <input id="diagName" class="dialogue-input" placeholder="e.g. emerald_crystal" value="custom_3d_asset">
+        <input id="diagName" class="dialogue-input" placeholder="e.g. magic_elixir_flask" value="custom_3d_asset">
       </div>
       <div class="dialogue-field">
-        <label class="dialogue-label">Color Themes & Swatches</label>
+        <label class="dialogue-label">Color Themes & Presets</label>
         <div class="swatch-row">
           <button class="swatch-btn" onclick="setColors('#2e8b57', '#8b4513')">🌲 Forest Green</button>
-          <button class="swatch-btn" onclick="setColors('#9b59b6', '#3498db')">🔮 Neon Amethyst</button>
-          <button class="swatch-btn" onclick="setColors('#e74c3c', '#f39c12')">🔥 Volcanic Gem</button>
-          <button class="swatch-btn" onclick="setColors('#1abc9c', '#ecf0f1')">❄️ Ice Frost</button>
+          <button class="swatch-btn" onclick="setColors('#9b59b6', '#00e5ff')">🔮 Neon Magic</button>
+          <button class="swatch-btn" onclick="setColors('#ff1744', '#a1887f')">🧪 Crimson Elixir</button>
+          <button class="swatch-btn" onclick="setColors('#ffd700', '#4a2c2a')">🏴‍☠️ Pirate Gold</button>
+          <button class="swatch-btn" onclick="setColors('#1abc9c', '#2193b0')">❄️ Frost Glacier</button>
         </div>
       </div>
       <div class="dialogue-field">
         <label class="dialogue-label">Custom Hex Colors</label>
         <div class="color-picker-row">
           <div class="color-picker-group">
-            <input type="color" id="diagColorPrimary" value="#2e8b57">
+            <input type="color" id="diagColorPrimary" value="#ff1744">
             <span class="dialogue-label">Primary</span>
           </div>
           <div class="color-picker-group">
-            <input type="color" id="diagColorSecondary" value="#8b4513">
+            <input type="color" id="diagColorSecondary" value="#a1887f">
             <span class="dialogue-label">Secondary</span>
           </div>
         </div>
@@ -874,7 +897,7 @@ form.addEventListener("submit", async (ev) => {
   bubble("user").textContent = text;
   input.value = "";
   
-  // Cute animated loader
+  // Animated loader
   const b = bubble("agent");
   b.innerHTML = '<div class="loading-indicator"><div class="poly-spinner"></div><span>Generating 3D Model & Wavefront OBJ... ⏳</span></div>';
   
