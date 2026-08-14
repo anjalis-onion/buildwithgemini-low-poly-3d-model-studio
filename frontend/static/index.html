@@ -34,7 +34,7 @@
   header {
     background: var(--accent-gradient);
     color: #fff;
-    padding: 1rem 1.5rem;
+    padding: 0.9rem 1.5rem;
     box-shadow: 0 4px 15px rgba(255, 101, 132, 0.25);
     display: flex;
     align-items: center;
@@ -64,7 +64,12 @@
     font-weight: 600;
   }
 
-  .dialogue-trigger-btn {
+  .header-actions {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .action-btn {
     background: #ffffff;
     color: var(--accent);
     border: 2px solid #ffffff;
@@ -81,7 +86,7 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
-  .dialogue-trigger-btn:hover {
+  .action-btn:hover {
     background: #ffe3e9;
     color: var(--accent-hover);
     transform: translateY(-2px);
@@ -169,31 +174,68 @@
     box-shadow: none;
   }
 
+  /* --- Interactive 3D Spinning Inspector Card --- */
+  .preview-3d-card {
+    background: #ffffff;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 1rem;
+    margin-top: 1rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .preview-3d-header {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .preview-3d-canvas {
+    width: 100%;
+    max-width: 380px;
+    height: 180px;
+    background: radial-gradient(circle, #fff0f4 0%, #ffd6e0 100%);
+    border-radius: 16px;
+    border: 2px dashed var(--border);
+  }
+
+  /* --- Download Button Improvements --- */
   .formatted-text a {
-    display: inline-block;
-    padding: 0.5rem 0.9rem;
-    margin: 0.3rem 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.1rem;
+    margin: 0.4rem 0;
     background: #fff;
     border: 2px solid var(--accent);
     color: var(--accent);
-    border-radius: 12px;
+    border-radius: 14px;
     text-decoration: none;
     font-weight: 800;
+    font-family: 'Fredoka', sans-serif;
     transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(255, 101, 132, 0.15);
   }
 
   .formatted-text a:hover {
     background: var(--accent);
     color: #fff;
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(255, 101, 132, 0.3);
+    transform: scale(1.03);
+    box-shadow: 0 6px 16px rgba(255, 101, 132, 0.35);
   }
 
   .formatted-text code {
     background: #ffe3e9;
     color: #c7254e;
-    padding: 0.2rem 0.4rem;
-    border-radius: 6px;
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
     font-family: monospace;
     font-size: 0.9rem;
   }
@@ -242,6 +284,27 @@
     box-shadow: 0 6px 16px rgba(255, 101, 132, 0.45);
   }
 
+  /* --- Animated Loading Indicator --- */
+  .loading-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Fredoka', sans-serif;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .poly-spinner {
+    width: 22px;
+    height: 22px;
+    border: 3px solid #ffd6e0;
+    border-top: 3px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
   /* --- Cute Dialogue Modal Layout --- */
   .dialogue-overlay {
     position: fixed;
@@ -255,16 +318,14 @@
     animation: fadeIn 0.25s ease;
   }
 
-  .dialogue-overlay.active {
-    display: flex;
-  }
+  .dialogue-overlay.active { display: flex; }
 
   .dialogue-card {
     background: #ffffff;
     border: 3px solid var(--border);
     border-radius: 28px;
     width: 90%;
-    max-width: 520px;
+    max-width: 540px;
     padding: 1.8rem;
     box-shadow: 0 20px 50px rgba(255, 101, 132, 0.3);
     position: relative;
@@ -341,6 +402,33 @@
     outline: none;
   }
 
+  .swatch-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.3rem;
+  }
+
+  .swatch-btn {
+    border: 2px solid var(--border);
+    background: #fff;
+    border-radius: 12px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: all 0.2s ease;
+  }
+
+  .swatch-btn:hover {
+    border-color: var(--accent);
+    transform: scale(1.05);
+  }
+
   .color-picker-row {
     display: flex;
     gap: 1rem;
@@ -387,9 +475,7 @@
     transition: all 0.2s ease;
   }
 
-  .btn-cancel:hover {
-    background: #ffd6e0;
-  }
+  .btn-cancel:hover { background: #ffd6e0; }
 
   .btn-submit {
     background: var(--accent-gradient);
@@ -441,9 +527,14 @@
     <div class="header-title">Low-Poly 3D Studio 🎨✨</div>
     <div class="header-subtitle">Procedural 3D Model & Asset Generator</div>
   </div>
-  <button class="dialogue-trigger-btn" onclick="openDialogue()">
-    ⚙️ Studio Dialogue
-  </button>
+  <div class="header-actions">
+    <button class="action-btn" onclick="openGuideModal()">
+      ❓ Blender Guide
+    </button>
+    <button class="action-btn" onclick="openDialogue()">
+      ⚙️ Studio Dialogue
+    </button>
+  </div>
 </header>
 
 <div class="quick-prompts">
@@ -460,7 +551,7 @@
   <button class="send-btn">Generate ✨</button>
 </form>
 
-<!-- Custom Cute Studio Dialogue Modal -->
+<!-- Custom Studio Dialogue Modal -->
 <div id="dialogueModal" class="dialogue-overlay" onclick="closeDialogueOnBackdrop(event)">
   <div class="dialogue-card">
     <div class="dialogue-header">
@@ -482,7 +573,16 @@
         <input id="diagName" class="dialogue-input" placeholder="e.g. emerald_crystal" value="custom_3d_asset">
       </div>
       <div class="dialogue-field">
-        <label class="dialogue-label">Colors</label>
+        <label class="dialogue-label">Color Themes & Swatches</label>
+        <div class="swatch-row">
+          <button class="swatch-btn" onclick="setColors('#2e8b57', '#8b4513')">🌲 Forest Green</button>
+          <button class="swatch-btn" onclick="setColors('#9b59b6', '#3498db')">🔮 Neon Amethyst</button>
+          <button class="swatch-btn" onclick="setColors('#e74c3c', '#f39c12')">🔥 Volcanic Gem</button>
+          <button class="swatch-btn" onclick="setColors('#1abc9c', '#ecf0f1')">❄️ Ice Frost</button>
+        </div>
+      </div>
+      <div class="dialogue-field">
+        <label class="dialogue-label">Custom Hex Colors</label>
         <div class="color-picker-row">
           <div class="color-picker-group">
             <input type="color" id="diagColorPrimary" value="#2e8b57">
@@ -502,11 +602,31 @@
   </div>
 </div>
 
+<!-- Blender Guide Modal -->
+<div id="guideModal" class="dialogue-overlay" onclick="closeGuideOnBackdrop(event)">
+  <div class="dialogue-card">
+    <div class="dialogue-header">
+      <div class="dialogue-title">🎨 Blender Import Cheat Sheet</div>
+      <button class="dialogue-close" onclick="closeGuideModal()">✕</button>
+    </div>
+    <div class="dialogue-body" style="font-size: 0.95rem; line-height: 1.6;">
+      <p><b>1. Download Model</b>: Click the pink package download button in chat to get your <code>.zip</code> file.</p>
+      <p><b>2. Extract Files</b>: Unzip to get both <code>.obj</code> (3D Geometry) and <code>.mtl</code> (Materials).</p>
+      <p><b>3. Open Blender</b>: Go to <b>File ➔ Import ➔ Wavefront (.obj)</b>.</p>
+      <p><b>4. View Materials</b>: Select your <code>.obj</code> file. Switch viewport shading to <b>Material Preview</b> to see colors!</p>
+    </div>
+    <div class="dialogue-footer">
+      <button class="btn-submit" onclick="closeGuideModal()">Got It! 👍</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const log = document.getElementById("log");
 const form = document.getElementById("form");
 const input = document.getElementById("input");
 const dialogueModal = document.getElementById("dialogueModal");
+const guideModal = document.getElementById("guideModal");
 
 function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 
@@ -523,16 +643,17 @@ function sendQuick(promptText) {
 }
 
 /* --- Dialogue Modal Functions --- */
-function openDialogue() {
-  dialogueModal.classList.add("active");
-}
+function openDialogue() { dialogueModal.classList.add("active"); }
+function closeDialogue() { dialogueModal.classList.remove("active"); }
+function closeDialogueOnBackdrop(e) { if (event.target === dialogueModal) closeDialogue(); }
 
-function closeDialogue() {
-  dialogueModal.classList.remove("active");
-}
+function openGuideModal() { guideModal.classList.add("active"); }
+function closeGuideModal() { guideModal.classList.remove("active"); }
+function closeGuideOnBackdrop(e) { if (event.target === guideModal) closeGuideModal(); }
 
-function closeDialogueOnBackdrop(event) {
-  if (event.target === dialogueModal) closeDialogue();
+function setColors(primary, secondary) {
+  document.getElementById("diagColorPrimary").value = primary;
+  document.getElementById("diagColorSecondary").value = secondary;
 }
 
 function submitDialogue() {
@@ -544,6 +665,81 @@ function submitDialogue() {
   const promptText = `Generate a ${type} model named "${name}" with primary color ${primary} and secondary color ${secondary}.`;
   closeDialogue();
   sendQuick(promptText);
+}
+
+/* --- Animated 3D Spinning Mesh Canvas --- */
+function create3DInspectorCard(container) {
+  const card = el("div", "preview-3d-card");
+  const header = el("div", "preview-3d-header", "✨ Live 3D Mesh Preview Inspector");
+  const canvas = el("canvas", "preview-3d-canvas");
+  card.appendChild(header);
+  card.appendChild(canvas);
+  container.appendChild(card);
+
+  // Simple 3D wireframe spinning polyhedron renderer
+  const ctx = canvas.getContext("2d");
+  let angle = 0;
+
+  // Icosahedron / low-poly 3D vertices
+  const vertices = [
+    [-1, 1, -1], [1, 1, -1], [1, -1, -1], [-1, -1, -1],
+    [-1, 1, 1], [1, 1, 1], [1, -1, 1], [-1, -1, 1],
+    [0, 1.8, 0], [0, -1.8, 0]
+  ];
+
+  const edges = [
+    [0,1],[1,2],[2,3],[3,0], [4,5],[5,6],[6,7],[7,4],
+    [0,4],[1,5],[2,6],[3,7], [0,8],[1,8],[4,8],[5,8],
+    [2,9],[3,9],[6,9],[7,9]
+  ];
+
+  function draw() {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const scale = Math.min(canvas.width, canvas.height) / 4.2;
+
+    angle += 0.02;
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+
+    const projected = vertices.map(([x, y, z]) => {
+      // Y rotation
+      let rx = x * cos - z * sin;
+      let rz = x * sin + z * cos;
+      // X rotation
+      let ry = y * Math.cos(0.4) - rz * Math.sin(0.4);
+      let rz2 = y * Math.sin(0.4) + rz * Math.cos(0.4);
+
+      let perspective = 3 / (rz2 + 4);
+      return [cx + rx * scale * perspective, cy + ry * scale * perspective];
+    });
+
+    // Draw 3D Edges
+    ctx.strokeStyle = "#ff6584";
+    ctx.lineWidth = 2.2;
+    edges.forEach(([i, j]) => {
+      ctx.beginPath();
+      ctx.moveTo(projected[i][0], projected[i][1]);
+      ctx.lineTo(projected[j][0], projected[j][1]);
+      ctx.stroke();
+    });
+
+    // Draw glowing vertices
+    ctx.fillStyle = "#ff7eb3";
+    projected.forEach(([px, py]) => {
+      ctx.beginPath();
+      ctx.arc(px, py, 4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
 }
 
 /* ----------------------------------------------------------------------------
@@ -648,6 +844,11 @@ function renderTextWithFormattedHtml(container, text) {
 
   d.innerHTML = formatted;
   container.appendChild(d);
+
+  // Attach live 3D spinning mesh inspector card if a 3D model was generated!
+  if (text.includes("Successfully generated 3D Model") || text.includes("Direct Downloads")) {
+    create3DInspectorCard(container);
+  }
 }
 
 function renderReply(b, parts) {
@@ -672,7 +873,11 @@ form.addEventListener("submit", async (ev) => {
   if (!text) return;
   bubble("user").textContent = text;
   input.value = "";
-  const b = bubble("agent"); b.textContent = "…";
+  
+  // Cute animated loader
+  const b = bubble("agent");
+  b.innerHTML = '<div class="loading-indicator"><div class="poly-spinner"></div><span>Generating 3D Model & Wavefront OBJ... ⏳</span></div>';
+  
   try {
     const res = await fetch("/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: text }) });
     const raw = await res.text();
