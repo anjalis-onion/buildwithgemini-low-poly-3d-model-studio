@@ -72,44 +72,22 @@ def generate_3d_model(
     m_type = model_type.lower().strip()
 
     try:
-        if "tree" in m_type or "pine" in m_type or "wood" in m_type:
-            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_tree(
+        if "windmill" in m_type or "mill" in m_type:
+            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_windmill(
                 output_dir=output_dir,
                 model_name=output_name,
-                foliage_color=primary_color,
-                trunk_color=secondary_color,
-            )
-            created_type = "Low-Poly Tree"
-        elif "rock" in m_type or "stone" in m_type or "boulder" in m_type:
-            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_rock(
-                output_dir=output_dir,
-                model_name=output_name,
-                rock_color=primary_color,
-            )
-            created_type = "Low-Poly Rock"
-        elif "house" in m_type or "building" in m_type or "cabin" in m_type:
-            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_house(
-                output_dir=output_dir,
-                model_name=output_name,
-                wall_color=primary_color,
+                tower_color=primary_color,
                 roof_color=secondary_color,
             )
-            created_type = "Low-Poly House"
-        elif "crystal" in m_type or "gem" in m_type or "prism" in m_type:
-            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_crystal(
+            created_type = "Low-Poly Windmill"
+        elif "sword" in m_type or "excalibur" in m_type or "blade" in m_type:
+            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_sword_in_stone(
                 output_dir=output_dir,
                 model_name=output_name,
-                crystal_color=primary_color,
+                stone_color=primary_color,
+                gold_color=secondary_color,
             )
-            created_type = "Low-Poly Crystal"
-        elif "shroom" in m_type or "fungi" in m_type or "mushroom" in m_type:
-            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_mushroom(
-                output_dir=output_dir,
-                model_name=output_name,
-                cap_color=primary_color,
-                stem_color=secondary_color,
-            )
-            created_type = "Low-Poly Glow Mushroom"
+            created_type = "Low-Poly Sword in Stone"
         elif "obelisk" in m_type or "rune" in m_type or "monolith" in m_type:
             obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_obelisk(
                 output_dir=output_dir,
@@ -118,14 +96,6 @@ def generate_3d_model(
                 rune_color=secondary_color,
             )
             created_type = "Low-Poly Runestone Obelisk"
-        elif "potion" in m_type or "flask" in m_type or "elixir" in m_type:
-            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_potion(
-                output_dir=output_dir,
-                model_name=output_name,
-                liquid_color=primary_color,
-                cork_color=secondary_color,
-            )
-            created_type = "Low-Poly Magic Potion"
         elif "chest" in m_type or "treasure" in m_type:
             obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_chest(
                 output_dir=output_dir,
@@ -134,23 +104,30 @@ def generate_3d_model(
                 gold_color=secondary_color,
             )
             created_type = "Low-Poly Treasure Chest"
-        elif "sword" in m_type or "excalibur" in m_type:
-            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_sword_in_stone(
+        elif "potion" in m_type or "flask" in m_type or "elixir" in m_type:
+            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_potion(
                 output_dir=output_dir,
                 model_name=output_name,
-                stone_color=primary_color,
-                gold_color=secondary_color,
+                liquid_color=primary_color,
+                cork_color=secondary_color,
             )
-            created_type = "Low-Poly Sword in Stone"
-        elif "windmill" in m_type:
-            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_windmill(
+            created_type = "Low-Poly Magic Potion"
+        elif "shroom" in m_type or "fungi" in m_type or "mushroom" in m_type:
+            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_mushroom(
                 output_dir=output_dir,
                 model_name=output_name,
-                tower_color=primary_color,
-                roof_color=secondary_color,
+                cap_color=primary_color,
+                stem_color=secondary_color,
             )
-            created_type = "Low-Poly Windmill"
-        elif "campfire" in m_type or "camp" in m_type or "pot" in m_type:
+            created_type = "Low-Poly Glow Mushroom"
+        elif "crystal" in m_type or "gem" in m_type or "prism" in m_type:
+            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_crystal(
+                output_dir=output_dir,
+                model_name=output_name,
+                crystal_color=primary_color,
+            )
+            created_type = "Low-Poly Crystal"
+        elif "campfire" in m_type or "camp" in m_type or "pot" in m_type or "fire" in m_type:
             obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_campfire(
                 output_dir=output_dir,
                 model_name=output_name,
@@ -166,7 +143,7 @@ def generate_3d_model(
                 deep_color=secondary_color,
             )
             created_type = "Low-Poly Iceberg Glacier"
-        elif "hover" in m_type or "pod" in m_type or "spaceship" in m_type:
+        elif "hover" in m_type or "pod" in m_type or "spaceship" in m_type or "sci-fi" in m_type:
             obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_hover_pod(
                 output_dir=output_dir,
                 model_name=output_name,
@@ -182,6 +159,29 @@ def generate_3d_model(
                 basket_color=secondary_color,
             )
             created_type = "Low-Poly Hot Air Balloon"
+        elif "house" in m_type or "cabin" in m_type or "hut" in m_type:
+            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_house(
+                output_dir=output_dir,
+                model_name=output_name,
+                wall_color=primary_color,
+                roof_color=secondary_color,
+            )
+            created_type = "Low-Poly House"
+        elif "rock" in m_type or "boulder" in m_type:
+            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_rock(
+                output_dir=output_dir,
+                model_name=output_name,
+                rock_color=primary_color,
+            )
+            created_type = "Low-Poly Rock"
+        elif "tree" in m_type or "pine" in m_type:
+            obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_tree(
+                output_dir=output_dir,
+                model_name=output_name,
+                foliage_color=primary_color,
+                trunk_color=secondary_color,
+            )
+            created_type = "Low-Poly Tree"
         else:
             # Fallback to Tree
             obj, mtl, zip_p, v_cnt, f_count = generate_low_poly_tree(
