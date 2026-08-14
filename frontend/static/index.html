@@ -861,15 +861,46 @@ function flattenText(messages) {
 
 function renderTextWithFormattedHtml(container, text) {
   const d = el("div", "formatted-text");
-  let formatted = text
+
+  // 1. Convert Markdown links [label](url) to HTML <a href="url">label</a> with download attribute
+  let formatted = text.replace(/\[([^\]]+)\]\((data:[^)]+|https?:\/\/[^)]+|[^\s)]+)\)/g, (match, label, url) => {
+    let fileName = "";
+    const matchFile = label.match(/\(([\w.-]+\.(zip|obj|mtl))\)/i) || match.match(/\(([\w.-]+\.(zip|obj|mtl))\)/i);
+    if (matchFile) {
+      fileName = matchFile[1];
+    } else if (url.startsWith("data:application/zip")) {
+      fileName = "low_poly_model.zip";
+    } else if (url.startsWith("data:text/plain")) {
+      fileName = "low_poly_model.obj";
+    }
+    const dlAttr = fileName ? `download="${fileName}"` : 'target="_blank"';
+    return `<a href="${url}" ${dlAttr}>${label}</a>`;
+  });
+
+  // 2. Ensure existing HTML <a href="data:..."> tags have download attributes
+  formatted = formatted.replace(/<a\s+href="(data:[^"]+)"([^>]*)>/gi, (match, url, rest) => {
+    if (!/download=/i.test(rest)) {
+      let fileName = "low_poly_model.zip";
+      if (url.startsWith("data:text/plain")) fileName = "low_poly_model.obj";
+      return `<a href="${url}" download="${fileName}" ${rest}>`;
+    }
+    return match;
+  });
+
+  // 3. Format headings, bold, code, and line breaks
+  formatted = formatted
+    .replace(/^### (.*$)/gim, "<h3>$1</h3>")
+    .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+    .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")
     .replace(/`([^`]+)`/g, "<code>$1</code>")
-    .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+    .replace(/\n/g, "<br>");
 
   d.innerHTML = formatted;
   container.appendChild(d);
 
   // Attach live 3D spinning mesh inspector card if a 3D model was generated!
-  if (text.includes("Successfully generated 3D Model") || text.includes("Direct Downloads")) {
+  if (text.includes("Successfully generated 3D Model") || text.includes("Direct Downloads") || text.includes("download") || text.includes("Wavefront")) {
     create3DInspectorCard(container);
   }
 }

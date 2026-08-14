@@ -209,19 +209,18 @@ def generate_3d_model(
 
         return (
             f"Successfully generated 3D Model ({created_type})!\n\n"
-            f"📥 **Direct Downloads to Your Computer**:\n"
-            f"- 📦 <a href=\"{zip_data_url}\" download=\"{base_zip_name}\"><b>Download Complete 3D Model Package ({base_zip_name})</b></a>\n"
-            f"- 📄 <a href=\"{obj_data_url}\" download=\"{base_obj_name}\"><b>Download 3D Geometry ({base_obj_name})</b></a>\n\n"
-            f"📊 **Model Statistics**:\n"
+            f"### 📥 Direct Downloads to Your Computer\n"
+            f"* 📦 [**Download Complete 3D Model Package ({base_zip_name})**]({zip_data_url})\n"
+            f"* 📄 [**Download 3D Geometry Only ({base_obj_name})**]({obj_data_url})\n\n"
+            f"### 📊 Model Statistics\n"
             f"- Vertices: {v_cnt}\n"
             f"- Faces: {f_count}\n"
-            f"- ZIP Verified: ✅ Unzippable\n"
-            f"- Saved Locally At: `{abs_zip}`\n\n"
-            f"🎨 **Blender Import Instructions**:\n"
-            f"1. Click the download link above to save `{base_zip_name}` directly to your computer.\n"
+            f"- ZIP Verified: ✅ Unzippable\n\n"
+            f"### 🎨 Blender Import Instructions\n"
+            f"1. Click the pink download button above to save `{base_zip_name}` directly to your computer.\n"
             f"2. Extract `{base_zip_name}` to get `{base_obj_name}` and `{base_mtl_name}`.\n"
             f"3. Open Blender ➔ File ➔ Import ➔ Wavefront (.obj).\n"
-            f"4. Select `{base_obj_name}`. Blender will automatically load `{base_mtl_name}` and render your materials!"
+            f"4. Select `{base_obj_name}` to view your model with materials!"
         )
 
     except Exception as e:
@@ -241,7 +240,7 @@ instruction = schema_manager.generate_system_prompt(
         "Runestone Obelisk, Magic Potion, Treasure Chest, Sword in Stone, Windmill, Campfire & Pot, "
         "Iceberg Glacier, Sci-Fi Hover Pod, and Hot Air Balloon (.obj, .mtl, and verified .zip files) "
         "that can be downloaded directly to their computer and opened in Blender. Always use `generate_3d_model` "
-        "to create 3D models and provide direct HTML download links."
+        "to create 3D models and ALWAYS preserve the exact `[**Download Package (filename.zip)**](data:...)` links returned by the tool."
     ),
     workflow_description="Analyze the user request, execute `generate_3d_model` when requested, and return structured A2UI visual cards when appropriate.",
     ui_description=(
